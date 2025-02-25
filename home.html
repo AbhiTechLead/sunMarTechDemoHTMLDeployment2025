@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SunMarTech</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+        .sidebar {
+            width: 60px;
+            background-color: #2C3E50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 10px;
+            height: 100vh;
+        }
+        .sidebar i {
+            color: white;
+            font-size: 20px;
+            margin: 35px 0;
+            cursor: pointer;
+        }
+        .sidebar .active {
+            background-color: #3E5871;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #2C3E50;
+            padding: 10px 20px;
+            color: white;
+			font-weight: bold;
+        }
+        .home-button {
+            display: flex;
+            align-items: center;
+        }
+        .home-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .home-button i {
+            margin-right: 8px;
+        }
+        .search-bar {
+            flex-grow: 0;
+            margin: 0 15px;
+            width: 250px;
+        }
+        .search-bar input {
+            width: 150%;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background-color: #34495E;
+            color: white;
+			text-align: center;
+        }
+        .search-bar input::placeholder {
+            color: #BDC3C7;
+        }
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+        .menu .user {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+        }
+        .menu .user i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+		
+		    /* Sidebar styling */
+    .sidebar {
+        width: 100px;
+        background-color: #2C3E50;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+        height: 100vh;
+        position: relative;
+    }
+	.menu .user, .menu .profile {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            margin-left: 15px;
+        }
+	.menu .user a, .menu .profile a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .menu .user i, .menu .profile i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+
+    /* Dropdown icon container */
+    .dropdown {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-top: 30px;
+    }
+
+    /* Dropdown content initially hidden */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 40px;
+        left: 60px; /* Adjust to position dropdown beside the sidebar */
+        width: 200px;
+        background-color: #2C3E50;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+	
+	.dropdown:hover .dropdown-content,
+	.dropdown-content:hover {
+		display: block;
+		pointer-events: auto;
+	}
+
+    /* Styling for dropdown items */
+    .dropdown-content div {
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    /* Hover effect on dropdown items */
+    .dropdown-content div:hover {
+        background-color: #3E5871;
+    }
+	
+	.dashboard-content {
+            padding: 20px;
+            display: flex; /* Use flexbox for layout */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            justify-content: space-around; /* Distribute items evenly */
+    }
+    .analytics-section {
+            width: 45%; /* Adjust as needed - gives space for two sections side by side */
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            box-sizing: border-box; /* Include padding and border in width */
+    }
+    .analytics-section h2 {
+            margin-top: 0;
+            color: #333; /* Darker heading color */
+    }
+    .data-count {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+    }
+    .data-count div {
+            text-align: center;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            min-width: 150px; /* Minimum width - adjust as needed */
+            background-color: #f9f9f9;
+            box-sizing: border-box; /* Include padding and border in width */
+            flex: 1; /* Make data counts take up equal space */
+    }
+    .chart-container {
+            width: 48%; /* Adjust as needed - slightly less than half for spacing */
+            margin: 1%; /* Small margin between charts and container edges */
+            display: inline-block; /* Key for side-by-side */
+            vertical-align: top; /* Align charts to the top */
+            height: 350px; /* Adjust height as needed */
+            box-sizing: border-box;
+			float: left;
+        }
+	 /* Media query for smaller screens - stack charts vertically */
+	@media (max-width: 768px) {
+    .chart-container {
+        width: 90%; /* Take up most of the width */
+        margin: 5%; /* Larger margin for spacing */
+        height: 300px; /* Adjust height for smaller screens */
+        float: none; /* Reset float on smaller screens */
+    }
+	}
+	
+	.analytics-section::after { /* Clearfix for floating elements */
+    content: "";
+    display: table;
+    clear: both;
+	}
+	
+	
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+    <!-- New icon with hover effect -->
+    <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+        <i class="fas fa-chart-line"></i>
+        <div class="dropdown-content">
+	    <div class="header">Lead Source</div>
+            <div>Webinar</div>
+            <div>Event</div>
+            <div>Website</div>
+            <div>Social</div>
+            <div>Files</div>
+			<div>Others</div>
+        </div>
+    </div>
+	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+            <i class="fas fa-shield-alt"></i>
+            <div class="dropdown-content">
+                <div class="header">Data Governance Setup</div>
+                <div>Consent</div>
+                <div>Policy</div>
+                <div>Rules</div>
+                <div>Ownership</div>
+            </div>
+    </div>
+	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+            <i class="fas fa-plug"></i>
+            <div class="dropdown-content">
+                <div class="header">Integration Setup</div>
+				<div>AI-Powered Validation</div>
+                <div>CRM</div>
+                <div>Mapping</div>
+                <div>Fields</div>
+                <div>Validation Rules</div>
+				<div>Domain Suppression</div>
+            </div>
+    </div>
+	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+            <i class="fas fa-file-alt"></i> 
+			<div class="dropdown-content">
+                <div class="header">Reports</div>
+                <div>Data Visualization</div>
+                <div>View Report</div>
+            </div>
+    </div>
+	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+            <i class="fas fa-cogs"></i> <!-- This is the new icon -->
+            <div class="dropdown-content">
+                <div class="header">Settings</div>
+                <div>Subscription(Upgrade)</div>
+                <div>User Management</div>
+                <div>Rules</div>
+                <div>Ownership</div>
+            </div>
+    </div>
+	</div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="home-button">
+                <a href="#">
+					<img src="https://sunmartech.com/wp-content/uploads/2023/05/Black.png" alt="Logo" width="130" height="30"">
+				</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="menu">
+				<div class="profile">
+                    <a href="#"><i class="fas fa-id-badge"></i> Profile</a>
+                </div>
+                <div class="user">
+                    <a href="#"><i class="fas fa-user"></i> akumar</a>
+                </div>
+            </div>
+        </div>
+		
+		<div class="dashboard-content">
+            <div class="analytics-section">
+                <h2>Total Data Counts</h2>
+                <div class="data-count">
+                    <div>
+                        <h3>Data by Source</h3>
+                        <p>Webinar: 150</p>
+                        <p>Event: 80</p>
+                        <p>Website: 220</p>
+                        <p>Social: 110</p>
+						<p>Files: 110</p>
+						<p>Others: 110</p>
+                    </div>
+                    <div>
+                        <h3>Integration Types</h3>
+                        <p>CRM: 200</p>
+                        <p>Marketing Automation: 150</p>
+                        <p>Analytics Platform: 100</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analytics-section">
+                <h2>Bad Data Analysis</h2>
+                <div class="data-count">
+                    <div>
+                        <h3>Missing Fields</h3>
+                        <p>Country: 30</p>
+                        <p>Email: 15</p>
+                        <p>Phone: 25</p>
+                    </div>
+                    <div>
+                        <h3>CRM Sync Status</h3>
+                        <p>Synced: 350</p>
+                        <p>Not Synced: 50</p>
+                        <p>Pending: 20</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analytics-section">
+            <h2>Data Source Distribution</h2>
+            <div class="chart-container">
+                <canvas id="sourceChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="integrationChart"></canvas>
+            </div>
+        </div>
+
+        <div class="analytics-section">
+            <h2>Missing Data Analysis</h2>
+            <div class="chart-container">
+                <canvas id="missingChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="syncChart"></canvas>
+            </div>
+        </div>
+		<div class="analytics-section">
+            <h2>Data Trends</h2>
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+			<div class="chart-container">  <canvas id="newTrendChart"></canvas>
+            </div>
+        </div>
+		
+		<div class="analytics-section">
+            <h2>Data Visualization (Based on Data Counts)</h2>
+            <div class="chart-container">
+                <canvas id="visualizationChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="visualizationPieChart"></canvas>
+            </div>
+        </div>
+
+        <div class="analytics-section">
+            <h2>View Report (Based on Bad Data Analysis)</h2>
+            <div class="chart-container">
+                <canvas id="reportChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="reportPieChart"></canvas>
+            </div>
+        </div>
+
+
+        </div>
+    </div>
+	
+	
+	
+	<script>
+        function showDropdown(dropdown) {
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+            dropdownContent.style.display = 'block';
+        }
+
+        function hideDropdown(dropdown) {
+            const dropdownContent = dropdown.querySelector('.dropdown-content');
+            setTimeout(() => { // Small delay to prevent flickering
+                if (!dropdown.matches(':hover') && !dropdown.querySelector('.dropdown-content:hover')) {
+                    dropdownContent.style.display = 'none';
+                }
+            }, 100); // Adjust delay as needed
+        }
+		
+		// Sample data for charts (Replace with your actual data)
+        const sourceData = {
+            labels: ['Webinar', 'Event', 'Website', 'Social', 'Files', 'Others'],
+            datasets: [{
+                data: [150, 80, 220, 110, 110, 110],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50'], // Example colors
+            }]
+        };
+
+        const integrationData = {
+            labels: ['CRM', 'Marketing Automation', 'Analytics Platform'],
+            datasets: [{
+                data: [200, 150, 100],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            }]
+        };
+		
+		const missingData = {
+            labels: ['Country', 'Email', 'Phone'],
+            datasets: [{
+                data: [30, 15, 25],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            }]
+        };
+		const syncData = {
+            labels: ['Synced', 'Not Synced', 'Pending'],
+            datasets: [{
+                data: [350, 50, 20],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            }]
+        };
+
+        // Create charts
+        const sourceChart = new Chart(document.getElementById('sourceChart'), {
+            type: 'pie', // Or 'bar', 'doughnut', etc.
+            data: sourceData,
+        });
+
+        const integrationChart = new Chart(document.getElementById('integrationChart'), {
+            type: 'pie',
+            data: integrationData,
+        });
+		
+		const missingChart = new Chart(document.getElementById('missingChart'), {
+            type: 'pie',
+            data: missingData,
+        });
+		
+		const syncChart = new Chart(document.getElementById('syncChart'), {
+            type: 'pie',
+            data: syncData,
+        });
+		
+		// Sample data for the trend chart (REPLACE WITH YOUR DATA)
+        const trendData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Time labels
+            datasets: [{
+                label: 'New Users', // Data series label
+                data: [50, 75, 60, 90, 80, 100], // Data values
+                borderColor: '#36A2EB', // Line color
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Fill color (optional)
+                borderWidth: 2, // Line width
+                tension: 0.4, // Smooths the line (adjust as needed)
+                pointRadius: 5, // Size of data points
+                pointBackgroundColor: '#36A2EB' // Color of data points
+            }]
+        };
+
+        // Create the trend chart
+        const trendChart = new Chart(document.getElementById('trendChart'), {
+            type: 'line', // Line graph
+            data: trendData,
+            options: {
+                responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Month' // X-axis label
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Users' // Y-axis label
+                        },
+                        beginAtZero: true // Start Y-axis at 0 (or adjust as needed)
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'New User Growth Trend', // Chart title
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        });
+		
+	const newTrendData = {
+		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Time labels
+		datasets: [{
+			label: 'Product Sales', // Data series label
+			data: [120, 150, 100, 180, 160, 200], // Data values
+			borderColor: '#4BC0C0', // Different line color
+			backgroundColor: 'rgba(75, 192, 192, 0.2)', // Different fill color
+			borderWidth: 2,
+			tension: 0.4,
+			pointRadius: 5,
+			pointBackgroundColor: '#4BC0C0'
+		}]
+	};
+
+	// Create the NEW trend chart
+	const newTrendChart = new Chart(document.getElementById('newTrendChart'), {
+		type: 'line', // Line graph
+		data: newTrendData,
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			scales: {
+				x: {
+					title: {
+						display: true,
+						text: 'Month' // X-axis label
+					}
+				},
+				y: {
+					title: {
+						display: true,
+						text: 'Sales' // Y-axis label
+					},
+					beginAtZero: true
+				}
+			},
+			plugins: {
+				title: {
+					display: true,
+					text: 'Product Sales Trend', // Chart title
+					font: {
+						size: 16
+					}
+				}
+			}
+		}
+	});
+	
+	// Data from your existing analytics sections:
+        const dataBySource = {
+            Webinar: 150,
+            Event: 80,
+            Website: 220,
+            Social: 110,
+            Files: 110,
+            Others: 110
+        };
+
+        const integrationTypes = {
+            CRM: 200,
+            "Marketing Automation": 150,
+            "Analytics Platform": 100
+        };
+
+        const missingFields = {
+            Country: 30,
+            Email: 15,
+            Phone: 25
+        };
+
+        const crmSyncStatus = {
+            Synced: 350,
+            "Not Synced": 50,
+            Pending: 20
+        };
+
+
+        // Data Visualization Charts (based on Total Data Counts)
+        const visualizationLabels = Object.keys(dataBySource).concat(Object.keys(integrationTypes));
+        const visualizationData = Object.values(dataBySource).concat(Object.values(integrationTypes));
+
+        const visualizationChartData = {
+            labels: visualizationLabels,
+            datasets: [{
+                label: 'Data Counts',
+                data: visualizationData,
+                backgroundColor: [ // Colorful bar chart
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50',
+                    '#8A2BE2', '#00CED1', '#FFA07A' // Add more colors as needed
+                ],
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const visualizationChart = new Chart(document.getElementById('visualizationChart'), {
+            type: 'bar',
+            data: visualizationChartData,
+            options: {
+                responsive: true,
+				maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const visualizationPieData = {
+            labels: visualizationLabels,
+            datasets: [{
+                data: visualizationData,
+                backgroundColor: [ // Colorful pie chart
+                   '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50',
+                    '#8A2BE2', '#00CED1', '#FFA07A' // Add more colors as needed
+                ],
+            }]
+        };
+
+        const visualizationPieChart = new Chart(document.getElementById('visualizationPieChart'), {
+            type: 'pie',
+            data: visualizationPieData,
+        });
+
+
+        // View Report Charts (based on Bad Data Analysis)
+        const reportLabels = Object.keys(missingFields).concat(Object.keys(crmSyncStatus));
+        const reportData = Object.values(missingFields).concat(Object.values(crmSyncStatus));
+
+        const reportChartData = {
+            labels: reportLabels,
+            datasets: [{
+                label: 'Bad Data Counts',
+                data: reportData,
+                borderColor: '#4BC0C0',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 2
+            }]
+        };
+
+        const reportChart = new Chart(document.getElementById('reportChart'), {
+            type: 'line',
+            data: reportChartData,
+            options: {
+                responsive: true,
+				maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const reportPieData = {
+            labels: reportLabels,
+            datasets: [{
+                data: reportData,
+                backgroundColor: [ // Colorful pie chart
+                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50',
+                    '#8A2BE2', '#00CED1', '#FFA07A' // Add more colors as needed
+                ],
+            }]
+        };
+
+        const reportPieChart = new Chart(document.getElementById('reportPieChart'), {
+            type: 'pie',
+            data: reportPieData,
+        });
+
+    </script>
+</body>
+</html>
