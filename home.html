@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SunMarTech</title>
+    <title>Xdott</title>
     <style>
         body {
             margin: 0;
@@ -12,7 +12,7 @@
         }
         .sidebar {
             width: 60px;
-            background-color: #2C3E50;
+            background-color: #2275D3;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,7 +39,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #2C3E50;
+            background-color: #2275D3;
             padding: 10px 20px;
             color: white;
 			font-weight: bold;
@@ -68,7 +68,7 @@
             padding: 8px;
             border-radius: 5px;
             border: none;
-            background-color: #34495E;
+            background-color: #1e6ab5;
             color: white;
 			text-align: center;
         }
@@ -93,7 +93,7 @@
 		    /* Sidebar styling */
     .sidebar {
         width: 100px;
-        background-color: #2C3E50;
+        background-color: #2275D3;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -136,7 +136,7 @@
         top: 40px;
         left: 60px; /* Adjust to position dropdown beside the sidebar */
         width: 200px;
-        background-color: #2C3E50;
+        background-color: #2275D3;
         border-radius: 5px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         z-index: 1;
@@ -218,6 +218,12 @@
     display: table;
     clear: both;
 	}
+    .apiiq-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            padding: 5px 10px;
+        }
 	
 	
     </style>
@@ -261,13 +267,22 @@
 				<div>Domain Suppression</div>
             </div>
     </div>
-	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-            <i class="fas fa-file-alt"></i> 
-			<div class="dropdown-content">
-                <div class="header">Reports</div>
-                <div>Data Visualization</div>
-                <div>View Report</div>
-            </div>
+    <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+        <i class="fas fa-file-alt"></i>
+        <div class="dropdown-content">
+            <div class="header">Reports</div>
+            <div>Data Visualization</div>
+            <div>View Report</div>
+        </div>
+    </div>
+    <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+        <i class="fas fa-tools"></i>
+        <div class="dropdown-content">
+            <div class="header">IQ Tools</div>
+            <div>Excel IQ</div>
+            <div>Table IQ</div>
+            <div>Data IQ</div>
+        </div>
     </div>
 	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
             <i class="fas fa-cogs"></i> <!-- This is the new icon -->
@@ -276,7 +291,6 @@
                 <div>Subscription(Upgrade)</div>
                 <div>User Management</div>
                 <div>Rules</div>
-                <div>Ownership</div>
             </div>
     </div>
 	</div>
@@ -284,10 +298,8 @@
     <div class="main-content">
         <div class="header">
             <div class="home-button">
-                <a href="#">
-					<img src="https://sunmartech.com/wp-content/uploads/2023/05/Black.png" alt="Logo" width="130" height="30"">
-				</a>
-            </div>
+				<a href="#" class="apiiq-text">APiiQ</a>
+			</div>
             <div class="search-bar">
                 <input type="text" placeholder="Search">
             </div>
@@ -296,7 +308,7 @@
                     <a href="#"><i class="fas fa-id-badge"></i> Profile</a>
                 </div>
                 <div class="user">
-                    <a href="#"><i class="fas fa-user"></i> akumar</a>
+                    <a href="#"><i class="fas fa-user"></i> Deepa</a>
                 </div>
             </div>
         </div>
