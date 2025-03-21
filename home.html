@@ -9,6 +9,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
             display: flex;
+			font-size: var(--dynamic-font-size, 16px); /* Default */
         }
         .sidebar i {
             color: black;
@@ -83,13 +84,13 @@
 		
 		    /* Sidebar styling */
     .sidebar {
-        width: 150px;
+        width: 100px;
         background-color: #F9FAFB;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-top: 10px;
-        height: 200vh;
+        height: 102vh;
         position: relative;
     }
 	.menu .user, .menu .profile {
@@ -121,7 +122,7 @@
     }
 
     /* Dropdown content initially hidden */
-    .dropdown-content {
+    .dropdown-content, .submenu-content {
         display: none;
         position: absolute;
         top: 40px;
@@ -147,9 +148,13 @@
     }
 
     /* Hover effect on dropdown items */
-    .dropdown-content div:hover {
-        background-color: #3E5871;
-    }
+    .dropdown-content > div:hover {
+    background-color: #66A6DF;
+	}
+
+	.submenu-content > div:hover {
+    background-color: #66A6DF;
+	}
 	
 	.dashboard-content {
             padding: 20px;
@@ -158,7 +163,7 @@
             justify-content: space-around; /* Distribute items evenly */
     }
     .analytics-section {
-            width: 45%; /* Adjust as needed - gives space for two sections side by side */
+            width: 33%; /* Adjust as needed - gives space for two sections side by side */
             margin-bottom: 20px;
             border: 1px solid #ddd;
             padding: 15px;
@@ -186,7 +191,7 @@
             flex: 1; /* Make data counts take up equal space */
     }
     .chart-container {
-            width: 48%; /* Adjust as needed - slightly less than half for spacing */
+            width: 100%; /* Adjust as needed - slightly less than half for spacing */
             margin: 1%; /* Small margin between charts and container edges */
             display: inline-block; /* Key for side-by-side */
             vertical-align: top; /* Align charts to the top */
@@ -210,89 +215,157 @@
     clear: both;
 	}
     .logo {
-        width: 70px; /* Adjust size as needed */
+        width: 35px; /* Adjust size as needed */
         height: auto;
+    }
+	
+	.dropdown-content > div:first-child {
+    background-color: grey;
+	}
+	
+	.submenu {
+        position: relative;
+    }
+    .submenu-content {
+        top: 0;
+        left: 100%;
+        min-width: 150px;
     }
 	
 	
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body>
     <div class="sidebar">
     <!-- New icon with hover effect -->
-    <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-        <i class="fas fa-chart-line"></i>
-        <div class="dropdown-content">
-	    <div class="header">Incoming Data</div>
-            <div>File Upload</div>
-            <div>App Sync</div>
-        </div>
-    </div>
 	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-            <i class="fas fa-shield-alt"></i>
+        <i class="fas fa-users"></i>
+        <div class="dropdown-content">
+			<div class="header">Lead Management</div>
+			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+				AI Data Analyzer
+				<div class="submenu-content">
+					<div>Dashboard</div>
+				</div>
+			</div>
+			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+				Incoming Data
+				<div class="submenu-content">
+					<div><a href="http://ec2-50-17-82-92.compute-1.amazonaws.com:8080/smtleadsender/index" target="_blank">File Upload</a></div>
+					<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+				App Sync
+				<div class="submenu-content">
+					<div><a href="SendReceiveClient.png" target="_blank">Sources</a></div>
+					<div><a href="SendReceiveClient.png" target="_blank">Destination</a></div>
+				</div>
+			</div>
+				</div>
+			</div>
+			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+				Database Tools
+				<div class="submenu-content">
+					<div>Excel IQ</div>
+					<div>Table IQ</div>
+					<div>Field Mapping IQ</div>
+				</div>
+			</div>
+			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+				Website Tracking
+				<div class="submenu-content">
+					<div>Form</div>
+				</div>
+			</div>
+			<div>AI-Powered Lead Engagement Chatbots</div>
+			<div>Lead Profile</div>
+			<div>Lead Scoring</div>
+        </div>
+    </div> 
+
+	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
+            <i class="fas fa-project-diagram"></i>
             <div class="dropdown-content">
-                <div class="header">Data Governance Setup</div>
-                <div>Consent</div>
-                <div>Policy</div>
-                <div>Rules</div>
-                <div>Ownership</div>
+                <div class="header">API Integration</div>
+				<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+					X. Connectors
+					<div class="submenu-content">
+						<div>Excel</div>
+						<div>Hubspot</div>
+						<div>Marketo</div>
+						<div>Salesforce</div>
+						<div>Zoho</div>
+						<div>Website Leads</div>
+						<div>MarTech Apps</div>
+					</div>
+				</div>
+				<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+					Setup
+					<div class="submenu-content">
+						<div>Fields</div>
+						<div>Lead Sources</div>
+					</div>
+				</div>
             </div>
     </div>
 	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-            <i class="fas fa-plug"></i>
+            <i class="fas fa-database"></i>
             <div class="dropdown-content">
-                <div class="header">Integration Setup</div>
-				<div>Fields</div>
-                <div>Lead Sources</div>
-                <div>CRM</div>
-                <div>Apps</div>
+                <div class="header">Data Governance</div>
+				<div>Governance/Compliance Rules Templates</div>
+                <div>Consent Management</div>
+                <div>Lead Verification</div>
+                <div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+					Lead Enrichment
+					<div class="submenu-content">
+						<div>Financial</div>
+						<div>Demographic</div>
+						<div>Behavior</div>
+					</div>
+				</div>
             </div>
     </div>
     <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-        <i class="fas fa-project-diagram"></i>
+        <i class="fas fa-handshake"></i>
         <div class="dropdown-content">
-            <div class="header">Workflow</div>
-            <div>Email Alerts</div>
-            <div>Reports</div>
-            <div>Campaigns</div>
+            <div class="header">CRM</div>
+			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+					Database
+					<div class="submenu-content">
+						<div>File Upload</div>
+						<div>App Sync</div>
+					</div>
+			</div>
+			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+					AI Campaign Management
+					<div class="submenu-content">
+						<div>Create</div>
+					</div>
+			</div>
+            <div>AI Content Assistance</div>
+            <div>AI Segment Assistance</div>
+            <div>WorkFlow</div>
         </div>
     </div>
     <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-        <i class="fas fa-file-alt"></i>
+        <i class="fas fa-chart-bar"></i>
         <div class="dropdown-content">
             <div class="header">Reports</div>
-            <div>Data Visualization</div>
-            <div>View Report</div>
-        </div>
-    </div>
-    <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-        <i class="fas fa-tools"></i>
-        <div class="dropdown-content">
-            <div class="header">Database IQ</div>
-            <div>Excel IQ</div>
-            <div>Table IQ</div>
-            <div>Field Mapping IQ</div>
-        </div>
-    </div>
-    <div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-        <i class="fas fa-robot"></i>
-        <div class="dropdown-content">
-            <div class="header">AI+API</div>
-            <div>Lead Scoring</div>
-            <div>Email Validation</div>
-            <div>Enrichment</div>
-            <div>Intent</div>
+            <div>Dashboard</div>
+            <div>Create Report</div>
+			<div>Data Visulization</div>
+            <div>Email Alert</div>
         </div>
     </div>
 	<div class="dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
             <i class="fas fa-cogs"></i> <!-- This is the new icon -->
             <div class="dropdown-content">
                 <div class="header">Settings</div>
+                <div>Domains</div>
                 <div>Subscription(Upgrade)</div>
                 <div>User Management</div>
-                <div>Support</div>
+				<div>Support</div>
             </div>
     </div>
 	</div>
@@ -300,7 +373,7 @@
     <div class="main-content">
         <div class="header">
             <div class="home-button">
-				<a href="#"> <img src="XdotLogo.jpeg" alt="APiiQ Logo" class="logo"> </a>
+				<a href="#"> <img src="XdottLogoNew.png" alt="APiiQ Logo" class="logo"> </a>
 			</div>
             <div class="search-bar">
                 <input type="text" placeholder="Search">
@@ -316,93 +389,50 @@
         </div>
 		
 		<div class="dashboard-content">
-            <div class="analytics-section">
-                <h2>Total Data Counts</h2>
-                <div class="data-count">
-                    <div>
-                        <h3>Data by Source</h3>
-                        <p>Webinar: 150</p>
-                        <p>Event: 80</p>
-                        <p>Website: 220</p>
-                        <p>Social: 110</p>
-						<p>Files: 110</p>
-						<p>Others: 110</p>
-                    </div>
-                    <div>
-                        <h3>Integration Types</h3>
-                        <p>CRM: 200</p>
-                        <p>Marketing Automation: 150</p>
-                        <p>Analytics Platform: 100</p>
-                    </div>
-                </div>
-            </div>
+			<div class="analytics-section">
+				<h2>Missing Field Analysis</h2>
+				<div class="chart-container">
+					<canvas id="missingFieldsChart"></canvas>
+				</div>
+			</div>
 
-            <div class="analytics-section">
-                <h2>Bad Data Analysis</h2>
-                <div class="data-count">
-                    <div>
-                        <h3>Missing Fields</h3>
-                        <p>Country: 30</p>
-                        <p>Email: 15</p>
-                        <p>Phone: 25</p>
-                    </div>
-                    <div>
-                        <h3>CRM Sync Status</h3>
-                        <p>Synced: 350</p>
-                        <p>Not Synced: 50</p>
-                        <p>Pending: 20</p>
-                    </div>
-                </div>
-            </div>
+			<div class="analytics-section">
+				<h2>Invalid Field Entries</h2>
+				<div class="chart-container">
+					<canvas id="invalidFieldsChart"></canvas>
+				</div>
+			</div>
 
-            <div class="analytics-section">
-            <h2>Data Source Distribution</h2>
-            <div class="chart-container">
-                <canvas id="sourceChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="integrationChart"></canvas>
-            </div>
-        </div>
+			<div class="analytics-section">
+				<h2>Duplicate Detection</h2>
+				<div class="chart-container">
+					<canvas id="duplicateDetectionChart"></canvas>
+				</div>
+			</div>
 
-        <div class="analytics-section">
-            <h2>Missing Data Analysis</h2>
-            <div class="chart-container">
-                <canvas id="missingChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="syncChart"></canvas>
-            </div>
-        </div>
-		<div class="analytics-section">
-            <h2>Data Trends</h2>
-            <div class="chart-container">
-                <canvas id="trendChart"></canvas>
-            </div>
-			<div class="chart-container">  <canvas id="newTrendChart"></canvas>
-            </div>
-        </div>
-		
-		<div class="analytics-section">
-            <h2>Data Visualization (Based on Data Counts)</h2>
-            <div class="chart-container">
-                <canvas id="visualizationChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="visualizationPieChart"></canvas>
-            </div>
-        </div>
-
-        <div class="analytics-section">
-            <h2>View Report (Based on Bad Data Analysis)</h2>
-            <div class="chart-container">
-                <canvas id="reportChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="reportPieChart"></canvas>
-            </div>
-        </div>
-
+			<div class="analytics-section">
+				<h2>Lead Quality Score Summary</h2>
+				<div class="chart-container">
+					<canvas id="leadQualityChart"></canvas>
+				</div>
+			</div>
+			<div class="analytics-section">
+				<h2>Sample Report Metrics</h2>
+				<div class="chart-container">
+					<canvas id="combinedChart"></canvas>
+				</div>
+			</div>
+			<div class="analytics-section">
+    <h2>AI Observations</h2>
+    <div class="chart-container">
+        <ul>
+            <li>Over 60% of records lack a LinkedIn URL, which may impact targeting and enrichment.</li>
+            <li>Nearly half of records are missing phone numbers.</li>
+            <li>A significant portion of emails and phone numbers are invalid or incomplete.</li>
+            <li>Duplicate entries make up 8.3% of your lead data, which could inflate campaign costs.</li>
+        </ul>
+    </div>
+</div>
 
         </div>
     </div>
@@ -424,12 +454,19 @@
             }, 100); // Adjust delay as needed
         }
 		
+		function showSubmenu(element) {
+			element.querySelector(".submenu-content").style.display = "block";
+		}
+		function hideSubmenu(element) {
+			element.querySelector(".submenu-content").style.display = "none";
+		}
+		
 		// Sample data for charts (Replace with your actual data)
         const sourceData = {
             labels: ['Webinar', 'Event', 'Website', 'Social', 'Files', 'Others'],
             datasets: [{
                 data: [150, 80, 220, 110, 110, 110],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50'], // Example colors
+                backgroundColor: ['#B0BEC5', '#CFD8DC', '#ECEFF1', '#BDBDBD', '#9E9E9E', '#D6D6D6'], // Subtle grey shades
             }]
         };
 
@@ -437,7 +474,7 @@
             labels: ['CRM', 'Marketing Automation', 'Analytics Platform'],
             datasets: [{
                 data: [200, 150, 100],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                backgroundColor: ['#B0BEC5', '#CFD8DC', '#ECEFF1'],
             }]
         };
 		
@@ -445,134 +482,16 @@
             labels: ['Country', 'Email', 'Phone'],
             datasets: [{
                 data: [30, 15, 25],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                backgroundColor: ['#B0BEC5', '#CFD8DC', '#ECEFF1'],
             }]
         };
 		const syncData = {
             labels: ['Synced', 'Not Synced', 'Pending'],
             datasets: [{
                 data: [350, 50, 20],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                backgroundColor: ['#B0BEC5', '#CFD8DC', '#ECEFF1'],
             }]
         };
-
-        // Create charts
-        const sourceChart = new Chart(document.getElementById('sourceChart'), {
-            type: 'pie', // Or 'bar', 'doughnut', etc.
-            data: sourceData,
-        });
-
-        const integrationChart = new Chart(document.getElementById('integrationChart'), {
-            type: 'pie',
-            data: integrationData,
-        });
-		
-		const missingChart = new Chart(document.getElementById('missingChart'), {
-            type: 'pie',
-            data: missingData,
-        });
-		
-		const syncChart = new Chart(document.getElementById('syncChart'), {
-            type: 'pie',
-            data: syncData,
-        });
-		
-		// Sample data for the trend chart (REPLACE WITH YOUR DATA)
-        const trendData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Time labels
-            datasets: [{
-                label: 'New Users', // Data series label
-                data: [50, 75, 60, 90, 80, 100], // Data values
-                borderColor: '#36A2EB', // Line color
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Fill color (optional)
-                borderWidth: 2, // Line width
-                tension: 0.4, // Smooths the line (adjust as needed)
-                pointRadius: 5, // Size of data points
-                pointBackgroundColor: '#36A2EB' // Color of data points
-            }]
-        };
-
-        // Create the trend chart
-        const trendChart = new Chart(document.getElementById('trendChart'), {
-            type: 'line', // Line graph
-            data: trendData,
-            options: {
-                responsive: true,
-				maintainAspectRatio: false,
-				scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Month' // X-axis label
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Number of Users' // Y-axis label
-                        },
-                        beginAtZero: true // Start Y-axis at 0 (or adjust as needed)
-                    }
-                },
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'New User Growth Trend', // Chart title
-                        font: {
-                            size: 16
-                        }
-                    }
-                }
-            }
-        });
-		
-	const newTrendData = {
-		labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Time labels
-		datasets: [{
-			label: 'Product Sales', // Data series label
-			data: [120, 150, 100, 180, 160, 200], // Data values
-			borderColor: '#4BC0C0', // Different line color
-			backgroundColor: 'rgba(75, 192, 192, 0.2)', // Different fill color
-			borderWidth: 2,
-			tension: 0.4,
-			pointRadius: 5,
-			pointBackgroundColor: '#4BC0C0'
-		}]
-	};
-
-	// Create the NEW trend chart
-	const newTrendChart = new Chart(document.getElementById('newTrendChart'), {
-		type: 'line', // Line graph
-		data: newTrendData,
-		options: {
-			responsive: true,
-			maintainAspectRatio: false,
-			scales: {
-				x: {
-					title: {
-						display: true,
-						text: 'Month' // X-axis label
-					}
-				},
-				y: {
-					title: {
-						display: true,
-						text: 'Sales' // Y-axis label
-					},
-					beginAtZero: true
-				}
-			},
-			plugins: {
-				title: {
-					display: true,
-					text: 'Product Sales Trend', // Chart title
-					font: {
-						size: 16
-					}
-				}
-			}
-		}
-	});
 	
 	// Data from your existing analytics sections:
         const dataBySource = {
@@ -606,96 +525,270 @@
         // Data Visualization Charts (based on Total Data Counts)
         const visualizationLabels = Object.keys(dataBySource).concat(Object.keys(integrationTypes));
         const visualizationData = Object.values(dataBySource).concat(Object.values(integrationTypes));
+		const greyShades = ['#B0BEC5', '#CFD8DC', '#ECEFF1', '#BDBDBD', '#9E9E9E', '#D6D6D6', '#AFAFAF', '#CCCCCC', '#E0E0E0'];
+		
+	const greyShadesNew = ['#B0BEC5', '#CFD8DC', '#ECEFF1', '#BDBDBD', '#9E9E9E', '#D6D6D6', '#AFAFAF'];
 
-        const visualizationChartData = {
-            labels: visualizationLabels,
-            datasets: [{
-                label: 'Data Counts',
-                data: visualizationData,
-                backgroundColor: [ // Colorful bar chart
-                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50',
-                    '#8A2BE2', '#00CED1', '#FFA07A' // Add more colors as needed
-                ],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        };
 
-        const visualizationChart = new Chart(document.getElementById('visualizationChart'), {
-            type: 'bar',
-            data: visualizationChartData,
-            options: {
-                responsive: true,
-				maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
+    const missingFieldsCtx = document.getElementById('missingFieldsChart').getContext('2d');
+    new Chart(missingFieldsCtx, {
+        type: 'bar',
+        data: {
+            labels: ['First Name', 'Last Name', 'Email Address', 'Phone Number', 'Company Name', 'Job Title', 'LinkedIn Profile URL'],
+            datasets: [
+                {
+                    label: 'Records with Missing Values',
+                    data: [1280, 940, 310, 4750, 620, 2190, 6000],
+                    backgroundColor: greyShadesNew,
+                    borderColor: '#607D8B',
+                    borderWidth: 1,
+                    yAxisID: 'y'
+                },
+                {
+                    label: '% Missing',
+                    data: [12.8, 9.4, 3.1, 47.5, 6.2, 21.9, 60.0],
+                    type: 'line', // Line chart for percentages
+                    borderColor: '#AFAFAF',
+                    backgroundColor: 'AFAFAF',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#AFAFAF',
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Missing Records'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: '% Missing'
+                    },
+                    grid: {
+                        drawOnChartArea: false // Removes overlap with left axis grid
                     }
                 }
             }
-        });
+        }
+    });
 
-        const visualizationPieData = {
-            labels: visualizationLabels,
+    const invalidFieldsCtx = document.getElementById('invalidFieldsChart').getContext('2d');
+    new Chart(invalidFieldsCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Email Address', 'Phone Number', 'Website URL'],
             datasets: [{
-                data: visualizationData,
-                backgroundColor: [ // Colorful pie chart
-                   '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50',
-                    '#8A2BE2', '#00CED1', '#FFA07A' // Add more colors as needed
-                ],
+                data: [210, 1450, 780],
+                backgroundColor: greyShadesNew
             }]
-        };
-
-        const visualizationPieChart = new Chart(document.getElementById('visualizationPieChart'), {
-            type: 'pie',
-            data: visualizationPieData,
-        });
-
-
-        // View Report Charts (based on Bad Data Analysis)
-        const reportLabels = Object.keys(missingFields).concat(Object.keys(crmSyncStatus));
-        const reportData = Object.values(missingFields).concat(Object.values(crmSyncStatus));
-
-        const reportChartData = {
-            labels: reportLabels,
-            datasets: [{
-                label: 'Bad Data Counts',
-                data: reportData,
-                borderColor: '#4BC0C0',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 2
-            }]
-        };
-
-        const reportChart = new Chart(document.getElementById('reportChart'), {
-            type: 'line',
-            data: reportChartData,
-            options: {
-                responsive: true,
-				maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                datalabels: {
+                    color: '#000',
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: (value, ctx) => {
+                        let dataset = ctx.chart.data.datasets[0].data;
+                        let total = dataset.reduce((acc, val) => acc + val, 0);
+                        let percentage = ((value / total) * 100).toFixed(1);
+                        return `${value} (${percentage}%)`; // Shows both count and percentage
                     }
                 }
             }
-        });
+        },
+        plugins: [ChartDataLabels] // Register plugin
+    });
 
-        const reportPieData = {
-            labels: reportLabels,
+    const duplicateDetectionCtx = document.getElementById('duplicateDetectionChart').getContext('2d');
+    new Chart(duplicateDetectionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Exact Duplicates', 'Fuzzy Duplicates', 'Total Duplicates'],
             datasets: [{
-                data: reportData,
-                backgroundColor: [ // Colorful pie chart
-                    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF7F50',
-                    '#8A2BE2', '#00CED1', '#FFA07A' // Add more colors as needed
-                ],
+                data: [520, 310, 830],
+                backgroundColor: greyShadesNew
             }]
-        };
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                datalabels: {
+                    color: '#000',
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: (value, ctx) => {
+                        let dataset = ctx.chart.data.datasets[0].data;
+                        let total = dataset.reduce((acc, val) => acc + val, 0);
+                        let percentage = ((value / total) * 100).toFixed(1);
+                        return `${value} (${percentage}%)`; // Display count and percentage
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels] // Register the plugin
+    });
 
-        const reportPieChart = new Chart(document.getElementById('reportPieChart'), {
-            type: 'pie',
-            data: reportPieData,
-        });
+
+	
+	const leadQualityCtx = document.getElementById('leadQualityChart').getContext('2d');
+    new Chart(leadQualityCtx, {
+        type: 'bar',
+        data: {
+            labels: ['High Quality', 'Medium Quality', 'Low Quality'],
+            datasets: [
+                {
+                    label: 'Lead Quality Distribution',
+					data: [4200, 3000, 2800],
+                    backgroundColor: greyShadesNew,
+                    borderColor: '#607D8B',
+                    borderWidth: 1,
+                    yAxisID: 'y'
+                },
+                {
+                    label: '% Total',
+                    data: [42, 30, 28],
+                    type: 'line', // Line chart for percentages
+                    borderColor: '#AFAFAF',
+                    backgroundColor: 'AFAFAF',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#AFAFAF',
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Total Records'
+                    }
+                },
+                y1: {
+                    type: 'linear',
+                    position: 'right',
+                    title: {
+                        display: true,
+                        text: '% Total'
+                    },
+                    grid: {
+                        drawOnChartArea: false // Removes overlap with left axis grid
+                    }
+                }
+            }
+        }
+    });
+	
+	
+	
+	document.addEventListener("DOMContentLoaded", function() {
+    const canvas = document.getElementById('combinedChart');
+    if (!canvas) {
+        console.error("Canvas element with ID 'combinedChart' not found!");
+        return;
+    }
+    
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: allMetricsData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Combined Report Metrics' }
+            },
+            scales: {
+                y: { beginAtZero: true, stacked: true },
+                x: { stacked: true }
+            }
+        }
+    });
+});
+	
+	const allMetricsData = {
+    labels: [
+        "High-Quality Leads", "Medium-Quality Leads", "Low-Quality Leads", "Enriched Leads", "Raw/Incomplete Leads",
+        "Avg. Lead Score", "Leads with Complete Profiles", "Missing Job Titles", "Missing Company Size", 
+        "Enrichment Success Rate", "Enrichment Latency", "Successful API Calls", "Failed API Calls", "Active Integrations",
+        "Inactive/Unstable Integrations", "Daily Sync Volume", "Qualified → Converted", "Captured → Qualified",
+        "Average Conversion Time", "Drop-off Rate (Mid-funnel)"
+    ],
+    datasets: [
+        {
+            label: "Lead Quality Score Report",
+            data: [42, 33, 25, 67, 33, 7.8, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            backgroundColor: "rgba(75, 192, 192, 0.6)"
+        },
+        {
+            label: "Data Completeness Report",
+            data: [null, null, null, null, null, null, 58, 29, 33, 85, 3.2, null, null, null, null, null, null, null, null, null],
+            backgroundColor: "rgba(255, 159, 64, 0.6)"
+        },
+        {
+            label: "API Integration Health",
+            data: [null, null, null, null, null, null, null, null, null, null, null, 95, 5, 6, 2, 150, null, null, null, null],
+            backgroundColor: "rgba(153, 102, 255, 0.6)"
+        },
+        {
+            label: "Lead Conversion Pipeline",
+            data: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 18, 47, 12.4, 35],
+            backgroundColor: "rgba(255, 99, 132, 0.6)"
+        }
+    ]
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('combinedChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: allMetricsData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Combined Report Metrics' }
+            },
+            scales: {
+                y: { beginAtZero: true, stacked: true },
+                x: { stacked: true }
+            }
+        }
+    });
+});
+
+function updateFontSize(size) {
+            document.documentElement.style.setProperty('--dynamic-font-size', size + 'px');
+        }
+
+        // Example: Assuming we extracted 18px from the image
+        updateFontSize(14);
+
 
     </script>
 </body>
