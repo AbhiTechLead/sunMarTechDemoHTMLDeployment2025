@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Governance Dashboard</title>
+	<style>
+		canvas {
+			height: 330px !important;
+		}
+	</style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-6xl mx-auto bg-white shadow-md p-6 rounded-lg">
+        <nav class="flex space-x-6 border-b pb-3">
+            <a href="#" class="text-blue-600 font-semibold">Overview</a>
+            <a href="#" class="text-gray-500">Rules & Templates</a>
+        </nav>
+        
+        <div class="grid grid-cols-4 gap-4 mt-4">
+            <div class="bg-[#D99A60] text-white p-4 rounded-lg">
+                <p class="text-lg">Overall Quality</p>
+                <p class="text-3xl font-bold">90% <span class="text-green-300">+5%</span></p>
+                <p>580 leads fixed by Xdott</p>
+            </div>
+            <div class="bg-white shadow p-4 rounded-lg">
+                <p class="text-lg">Compliance Accuracy</p>
+                <p class="text-3xl font-bold">45% <span class="text-green-500">+3%</span></p>
+                <p>220 leads rejected</p>
+            </div>
+            <div class="bg-white shadow p-4 rounded-lg">
+                <p class="text-lg">Lead Completeness</p>
+                <p class="text-3xl font-bold">55% <span class="text-red-500">-1%</span></p>
+                <p>70 leads rejected</p>
+            </div>
+            <div class="bg-white shadow p-4 rounded-lg">
+                <p class="text-lg">Data Integrity</p>
+                <p class="text-3xl font-bold">97% <span class="text-green-500">+6%</span></p>
+                <p>260 leads rejected</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 mt-6">
+            <div class="w-full h-96 p-4 bg-white shadow rounded-lg">
+                <h2 class="text-center text-lg font-semibold mb-2">Data Quality Metrics</h2>
+                <canvas id="dataChart"></canvas>
+            </div>
+            <div class="w-full h-96 p-4 bg-white shadow rounded-lg">
+                <h2 class="text-center text-lg font-semibold mb-2">Action Center Overview</h2>
+                <canvas id="actionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mt-6 rounded-lg">
+            <p class="font-semibold">Compliance Violation Detected</p>
+            <p>A potential compliance violation was found in your lead data. This might be due to issues with data consent.</p>
+            <button class="mt-2 bg-blue-600 text-white px-4 py-2 rounded">Review Consent</button>
+            <button class="mt-2 bg-gray-600 text-white px-4 py-2 rounded">Contact Support</button>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('dataChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Overall Quality', 'Compliance Accuracy', 'Lead Completeness', 'Data Integrity', 'Leads Fixed', 'Leads Rejected'],
+                datasets: [{
+                    label: 'Metrics',
+                    data: [90, 45, 55, 97, 580, 260],
+                    backgroundColor: ['#99DAD9', '#FFC690', '#C3A3FF', '#FFA2B5', '#A4E2D6', '#D99A60']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+
+        const actionCtx = document.getElementById('actionChart').getContext('2d');
+        new Chart(actionCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Anomalies Detected', 'New Fields Available', 'Fields Undetected', 'Compliance Updates'],
+                datasets: [{
+                    label: 'Action Center',
+                    data: [4, 7, 10, 3],
+                    backgroundColor: ['#99DAD9', '#FFC690', '#C3A3FF', '#FFA2B5']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

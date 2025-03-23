@@ -232,6 +232,24 @@
         min-width: 150px;
     }
 	
+	.chart-container ul li {
+        font-size: 20px; /* Increase size as needed */
+		margin-bottom: 10px;
+    }
+	
+	.submenu-content a {
+		text-decoration: none; /* Removes underline */
+		color: inherit; /* Uses parent element's color */
+	}
+
+	.submenu-content a:hover {
+		text-decoration: none; /* Ensures no underline on hover */
+		color: inherit; /* Keeps color unchanged on hover */
+	}
+	.hyperlink-hide a{
+		text-decoration: none; /* Removes underline */
+		color: inherit; /* Uses parent element's color */
+	}
 	
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -313,9 +331,14 @@
             <i class="fas fa-database"></i>
             <div class="dropdown-content">
                 <div class="header">Data Governance</div>
-				<div>Governance/Compliance Rules Templates</div>
+				<div class="hyperlink-hide"><a href="dataGovernence.html" target="_blank">Governance/Compliance Rules Templates</a></div>
                 <div>Consent Management</div>
-                <div>Lead Verification</div>
+				<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
+					Lead Verification
+					<div class="submenu-content">
+						<div><a href="http://email-app-api-env.eba-hnambdzp.us-east-1.elasticbeanstalk.com/" target="_blank">AI Email verification</a></div>
+					</div>
+				</div>
                 <div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
 					Lead Enrichment
 					<div class="submenu-content">
@@ -527,7 +550,7 @@
         const visualizationData = Object.values(dataBySource).concat(Object.values(integrationTypes));
 		const greyShades = ['#B0BEC5', '#CFD8DC', '#ECEFF1', '#BDBDBD', '#9E9E9E', '#D6D6D6', '#AFAFAF', '#CCCCCC', '#E0E0E0'];
 		
-	const greyShadesNew = ['#B0BEC5', '#CFD8DC', '#ECEFF1', '#BDBDBD', '#9E9E9E', '#D6D6D6', '#AFAFAF'];
+	const greyShadesNew = ['#99DAD9', '#FFC690', '#C3A3FF', '#FFA2B5', '#A4E2D6', '#E4F5F3', '#D99A60'];
 
 
     const missingFieldsCtx = document.getElementById('missingFieldsChart').getContext('2d');
@@ -712,19 +735,27 @@
         console.error("Canvas element with ID 'combinedChart' not found!");
         return;
     }
-    
+    canvas.style.height = "600px";
     const ctx = canvas.getContext('2d');
     new Chart(ctx, {
         type: 'bar',
         data: allMetricsData,
         options: {
             responsive: true,
+			maintainAspectRatio: false, // Allows the chart to expand
             plugins: {
                 legend: { position: 'top' },
                 title: { display: true, text: 'Combined Report Metrics' }
             },
             scales: {
-                y: { beginAtZero: true, stacked: true },
+                y: {
+                    beginAtZero: true,
+                    stacked: true,
+                    max: 300, // Adjust max value as per data range to expand bars
+                    ticks: {
+                        stepSize: 50 // Increases gap between y-axis labels
+                    }
+                },
                 x: { stacked: true }
             }
         }
@@ -742,22 +773,22 @@
     datasets: [
         {
             label: "Lead Quality Score Report",
-            data: [42, 33, 25, 67, 33, 7.8, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+            data: [142, 133, 125, 167, 133, 17.8, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
             backgroundColor: "rgba(75, 192, 192, 0.6)"
         },
         {
             label: "Data Completeness Report",
-            data: [null, null, null, null, null, null, 58, 29, 33, 85, 3.2, null, null, null, null, null, null, null, null, null],
+            data: [null, null, null, null, null, null, 158, 129, 133, 185, 13.2, null, null, null, null, null, null, null, null, null],
             backgroundColor: "rgba(255, 159, 64, 0.6)"
         },
         {
             label: "API Integration Health",
-            data: [null, null, null, null, null, null, null, null, null, null, null, 95, 5, 6, 2, 150, null, null, null, null],
+            data: [null, null, null, null, null, null, null, null, null, null, null, 195, 15, 16, 12, 500, null, null, null, null],
             backgroundColor: "rgba(153, 102, 255, 0.6)"
         },
         {
             label: "Lead Conversion Pipeline",
-            data: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 18, 47, 12.4, 35],
+            data: [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 118, 147, 112.4, 135],
             backgroundColor: "rgba(255, 99, 132, 0.6)"
         }
     ]
