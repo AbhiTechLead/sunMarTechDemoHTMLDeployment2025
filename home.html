@@ -233,7 +233,7 @@
     }
 	
 	.chart-container ul li {
-        font-size: 20px; /* Increase size as needed */
+        font-size: 16px; /* Increase size as needed */
 		margin-bottom: 10px;
     }
 	
@@ -250,6 +250,20 @@
 		text-decoration: none; /* Removes underline */
 		color: inherit; /* Uses parent element's color */
 	}
+	
+	body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+        }
+        h2 {
+            font-weight: 600;
+        }
+        .chart-container ul {
+            padding: 0;
+        }
+        .chart-container li {
+            padding: 5px 0;
+        }
 	
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -272,7 +286,7 @@
 			<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
 				Incoming Data
 				<div class="submenu-content">
-					<div><a href="http://ec2-50-17-82-92.compute-1.amazonaws.com:8080/smtleadsender/index" target="_blank">File Upload</a></div>
+					<div><a href="http://ec2-52-90-54-37.compute-1.amazonaws.com:8080/xdottintegration/index" target="_blank">File Upload</a></div>
 					<div class="submenu" onmouseenter="showSubmenu(this)" onmouseleave="hideSubmenu(this)">
 				App Sync
 				<div class="submenu-content">
